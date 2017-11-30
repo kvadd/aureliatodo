@@ -1,0 +1,25 @@
+<template>
+    <h1>${heading}</h1>
+        
+    <form submit.trigger="addTodo()">
+        <input type="text" value.bind="todoDescription">
+        <button type="submit">Add Todo</button>
+    </form>
+
+    <ul>
+        <li repeat.for="todo of todos" if.bind="!todo.done">
+            <input type="checkbox" checked.bind="todo.done" click.delegate="setLocalStorageTodos(todo)">
+            ${todo.description}
+        </li>
+    </ul>
+    <h3>Completed</h3>
+    <ul>
+        <li repeat.for="todo of todos" if.bind="todo.done">
+            <input type="checkbox" checked.bind="todo.done" click.delegate="setLocalStorageTodos(todo)">
+            <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
+                ${todo.description}
+            </span> &nbsp;
+            <button click.trigger="removeTodo(todo)">Remove</button>
+        </li>
+    </ul>
+</template>
